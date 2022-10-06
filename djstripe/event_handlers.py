@@ -43,6 +43,11 @@ def update_customer_helper(metadata, customer_id, subscriber_key):
         except ObjectDoesNotExist:
             pass
         else:
+            if subscriber.customer != customer:
+                # there is another customer that points to the same subscriber
+                logger.warning(f'Inconsistent customer/subscriber info.')
+                subscriber.customer.subscriber = None
+                subscriber.customer.save()
             customer.subscriber = subscriber
             customer.metadata = metadata
             customer.save()
