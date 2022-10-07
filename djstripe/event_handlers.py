@@ -43,7 +43,8 @@ def update_customer_helper(metadata, customer_id, subscriber_key):
         except ObjectDoesNotExist:
             pass
         else:
-            customer.subscriber = subscriber
+            if not hasattr(customer, 'subscriber'):
+                customer.subscriber = subscriber
             customer.metadata = metadata
             customer.save()
 
