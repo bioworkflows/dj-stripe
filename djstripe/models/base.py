@@ -616,7 +616,7 @@ class StripeModel(StripeBaseModel):
                 if id_.startswith('cus_'):
                     log.write(f'Existing customers\n')
                     for cus in cls.stripe_objects.all():
-                        log.write(f'{cus.id=}')
+                        log.write(f'{cus.id=}\n')
 
             if id_ is not None:
                 instance = cls.stripe_objects.get(id=id_)
@@ -642,7 +642,7 @@ class StripeModel(StripeBaseModel):
                 cls, data, api_key=api_key, pending_relations=pending_relations
             )
             with open('test.log', 'a') as log:
-                log.write('Handling DoesNotExist 2')
+                log.write('Handling DoesNotExist 2\n')
         return instance
 
     @classmethod
