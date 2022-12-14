@@ -66,7 +66,8 @@ def customer_webhook_handler(event):
     # will recieve all events of the type customer.X.Y so
     # need to ensure the data object is related to Customer Object
     target_object_type = event.data.get("object", {}).get("object", {})
-    print(f'handing customer event {event.id}')
+    with open('test.log', 'a') as log:
+        log.write(f'handing customer event {event.id}\n')
 
     if event.customer and target_object_type == "customer":
 

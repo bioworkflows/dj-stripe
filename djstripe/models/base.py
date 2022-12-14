@@ -611,7 +611,8 @@ class StripeModel(StripeBaseModel):
         )
         try:
             id_ = get_id_from_stripe_data(stripe_data)
-            print(f'GOT {id_=} {cls=}')
+            with open('test.log', 'a') as log:
+                log.write(f'GOT {id_=} {cls=}\n')
             if id_ is not None:
                 instance = cls.stripe_objects.get(id=id_)
             else:

@@ -1567,7 +1567,8 @@ class Event(StripeModel):
         See event handlers registered in the ``djstripe.event_handlers`` module
         (or handlers registered in djstripe plugins or contrib packages).
         """
-        print(f'calling handler for {self.id}')
+        with open('test.log', 'a') as log:
+            log.write(f'calling handler for {self.id}\n')
 
         webhooks.call_handlers(event=self)
 

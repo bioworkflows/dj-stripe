@@ -43,7 +43,8 @@ class ProcessWebhookView(View):
         else:
             webhook_endpoint = None
 
-        print(f'URL handling webhook with {webhook_endpoint=}')
+        with open('test.log', 'a') as log:
+            log.write(f'URL handling webhook with {webhook_endpoint=}\n')
         trigger = WebhookEventTrigger.from_request(
             request, webhook_endpoint=webhook_endpoint
         )

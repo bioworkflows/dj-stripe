@@ -234,7 +234,8 @@ class WebhookEventTrigger(models.Model):
                     djstripe_settings.WEBHOOK_EVENT_CALLBACK(obj, api_key=api_key)
                 else:
                     # Process the item (do not save it, it'll get saved below)
-                    print(f'CALLING PROCESS')
+                    with open('test.log', 'a') as log:
+                        log.write(f'CALLING PROCESS\n')
                     obj.process(save=False, api_key=api_key)
                 signals.webhook_post_process.send(
                     sender=cls, instance=obj, api_key=api_key
