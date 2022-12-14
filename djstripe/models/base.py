@@ -642,7 +642,7 @@ class StripeModel(StripeBaseModel):
                 cls, data, api_key=api_key, pending_relations=pending_relations
             )
             with open('test.log', 'a') as log:
-                log.write(('Handling DoesNotExist 2')
+                log.write('Handling DoesNotExist 2')
         return instance
 
     @classmethod
