@@ -611,6 +611,7 @@ class StripeModel(StripeBaseModel):
         )
         try:
             id_ = get_id_from_stripe_data(stripe_data)
+            print(f'GOT {id_=} {cls=}')
             if id_ is not None:
                 instance = cls.stripe_objects.get(id=id_)
             else:
@@ -618,6 +619,7 @@ class StripeModel(StripeBaseModel):
                 raise cls.DoesNotExist
 
         except cls.DoesNotExist:
+            print('Handling DoesNotExist')
             # try to create iff instance doesn't already exist in the DB
             # TODO dictionary unpacking will not work if cls has any ManyToManyField
             instance = cls(**stripe_data)
@@ -632,7 +634,7 @@ class StripeModel(StripeBaseModel):
             instance._attach_objects_post_save_hook(
                 cls, data, api_key=api_key, pending_relations=pending_relations
             )
-
+            print('Handling DoesNotExist 2')
         return instance
 
     @classmethod
